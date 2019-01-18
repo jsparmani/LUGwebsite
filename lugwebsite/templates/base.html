@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
 	<title></title>
+
 </head>
 <body>
 	{% block content %}
@@ -13,5 +15,6 @@
 		<a href="{% url 'accounts:login' %}">Login</a>
 		<a href="{% url 'accounts:signup' %}">Signup</a>
 	{% endif %}
+
 </body>
 </html>
