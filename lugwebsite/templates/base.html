@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{% block content %}
+	{% endblock %}
+	{% if user.is_authenticated %}
+		<h2>Hello {{user.first_name}}, welcome aboard!</h2>
+		<a href="{% url 'accounts:logout' %}">Logout</a>
+	{% else %}
+		<a href="{% url 'accounts:login' %}">Login</a>
+		<a href="{% url 'accounts:signup' %}">Signup</a>
+	{% endif %}
+</body>
+</html>
