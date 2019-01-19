@@ -1,26 +1,26 @@
 from django.db import models
-
-# Create your models here.
-
-from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth import get_user_model
-User = get_user_model()
-
 
 # Create your models here.
 
+
+
+User = get_user_model()
+
+
 class Post(models.Model):
 	user = models.ForeignKey(User,related_name='posts',on_delete=models.CASCADE)
+	title = models.CharField(max_length=150, default=('New Post'))
 	created_at = models.DateTimeField(auto_now=True)
 	message = models.TextField()
 
 	def __str__(self):
-		return self.message
+		return self.title
 
 	def get_absolute_url(self):
-		return reverse('posts:single',kwargs={'username':self.user.username,'pk':self.pk})
+		return reverse('blog:all')
 
 	class Meta():
 		ordering = ['-created_at']
@@ -28,7 +28,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments')
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
     author = models.CharField(max_length=100)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now=True)

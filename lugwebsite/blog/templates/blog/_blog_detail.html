@@ -1,0 +1,7 @@
+<h3><em>{{ post.title }}</em> by {{post.user.username}} at {{post.created_at}}</h3>
+<p>{{post.message}}</p>
+<br>
+<br>
+{% if user.is_authenticated and post.user == user and not hide_delete %}
+	<a href="{% url 'blog:delete' pk=post.pk %}" title="delete">Delete</a>
+{% endif %}

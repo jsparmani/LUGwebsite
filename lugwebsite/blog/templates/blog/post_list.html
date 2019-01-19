@@ -1,0 +1,15 @@
+{% extends "blog/blog_base.html" %}
+
+{% block prepost %}
+	<a href="{% url 'blog:create' %}">Create New Post</a>
+{% endblock %}
+
+{% block post_content %}
+	<ul>
+		{% for post in post_list %}
+			<li>
+	  			{% include "blog/_blog_list.html" %}
+	  		</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

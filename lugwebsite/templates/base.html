@@ -6,15 +6,17 @@
 
 </head>
 <body>
-	{% block content %}
-	{% endblock %}
 	{% if user.is_authenticated %}
-		<h2>Hello {{user.first_name}}, welcome aboard!</h2>
+		<a href="{% url 'blog:all' %}">Blogs</a>
+		<a href="{% url 'blog:for_user' username=user.username %}">My Blogs</a>
 		<a href="{% url 'accounts:logout' %}">Logout</a>
+		<h3>Hello {{user.first_name}}, welcome aboard!</h3>
 	{% else %}
 		<a href="{% url 'accounts:login' %}">Login</a>
 		<a href="{% url 'accounts:signup' %}">Signup</a>
 	{% endif %}
+	{% block content %}
+	{% endblock %}
 
 </body>
 </html>
