@@ -15,6 +15,7 @@ User = get_user_model()
 # Create your views here.
 
 
+# VIEWS RELATED TO POST CREATE, LIST, DELETE, DETAIL, USER LIST
 class CreatePost(LoginRequiredMixin, generic.CreateView):
     model = models.Post
     fields = ['title','message']
@@ -27,10 +28,9 @@ class CreatePost(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-
 class PostList(generic.ListView):
     model = models.Post
-
+    ####
 
 
 class PostDetail(generic.DetailView):
@@ -74,3 +74,7 @@ class UserPosts(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["post_user"] = self.post_user
         return context
+
+
+
+# VIEWS RELATED TO COMMENTS

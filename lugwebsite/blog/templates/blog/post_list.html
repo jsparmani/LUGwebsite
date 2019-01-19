@@ -1,7 +1,10 @@
 {% extends "blog/blog_base.html" %}
 
 {% block prepost %}
-	<a href="{% url 'blog:create' %}">Create New Post</a>
+	{% if user.is_authenticated %}
+		<a href="{% url 'blog:create' %}">Create New Post</a>
+		<a href="{% url 'blog:for_user' username=user.username %}">My Blogs</a>
+	{% endif %}
 {% endblock %}
 
 {% block post_content %}

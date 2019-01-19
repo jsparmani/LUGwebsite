@@ -34,7 +34,8 @@ class Comment(models.Model):
     created_date = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('posts:single',kwargs={'username':self.user.username,'pk':self.pk})
+        return reverse('blog:single',kwargs={'username':self.user.username,'pk':self.pk})
 
     def __str__(self):
-        return self.text
+        return self.text 
+

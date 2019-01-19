@@ -2,6 +2,7 @@
 
 {% block prepost %}
 	<a href="{% url 'blog:create' %}">Create New Post</a>
+	<a href="{% url 'blog:for_user' username=user.username %}">My Blogs</a>
 	<h3>Your Blog History</h3>
 {% endblock %}
 
