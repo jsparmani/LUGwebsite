@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import Http404
@@ -33,7 +34,7 @@ class PostList(generic.ListView):
     ####
 
 
-class PostDetail(generic.DetailView):
+class PostDetail(LoginRequiredMixin,generic.DetailView):
     model = models.Post
 
     def get_queryset(self):
@@ -56,7 +57,7 @@ class DeletePost(LoginRequiredMixin, generic.DeleteView):
         return super().delete(*args, **kwargs)
 
 
-class UserPosts(generic.ListView):
+class UserPosts(LoginRequiredMixin,generic.ListView):
     model = models.Post
     template_name = "blog/user_post_list.html"
 
@@ -78,3 +79,19 @@ class UserPosts(generic.ListView):
 
 
 # VIEWS RELATED TO COMMENTS
+
+@login_required
+def add_comment_to_post(request,pk):
+    post = get_object_or_404(models.Post,pk=pk)
+
+    if request.method == 'POST':
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user.username
+            comment.save()
+            return redirect ('post_detail',pk=post.pk)
+    else:
+        form = forms.CommentForm()
+    return render(request,'blog/comment_form.html',{'form':form})
