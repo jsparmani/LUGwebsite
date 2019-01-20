@@ -8,6 +8,8 @@ from django.urls import reverse_lazy
 from . import models
 from . import forms
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your views here.
 
 # VIEWS RELATED TO POST CREATE, LIST, DELETE, DETAIL, USER LIST
@@ -56,3 +58,32 @@ class CreateEvent(LoginRequiredMixin, generic.FormView):
 class EventList(generic.ListView):
     model = models.Event
     ####
+
+class EventDetail(LoginRequiredMixin,generic.DetailView):
+    model = models.Event
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            user__username__iexact=self.kwargs.get("username")
+        )
+
+
+class UserEvents(LoginRequiredMixin,generic.ListView):
+    model = models.Event
+    template_name = "event/user_event_list.html"
+
+    def get_queryset(self):
+        try:
+            self.event_user = User.objects.prefetch_related("events").get(
+                username__iexact=self.kwargs.get("username")
+            )
+        except User.DoesNotExist:
+            raise Http404
+        else:
+            return self.event_user.events.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["event_user"] = self.event_user
+        return context

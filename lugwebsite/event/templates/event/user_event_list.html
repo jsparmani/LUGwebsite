@@ -1,10 +1,9 @@
 {% extends "event/event_base.html" %}
 
 {% block pre_event %}
-	{% if user.is_authenticated %}
-		<a href="{% url 'event:create' %}">Create New Event</a>
-		<a href="{% url 'event:for_user' username=user.username %}">My Events</a>
-	{% endif %}
+	<a href="{% url 'event:create' %}">Create New Event</a>
+	<a href="{% url 'event:for_user' username=user.username %}">My Events</a>
+	<h3>Your Event History</h3>
 {% endblock %}
 
 {% block event_content %}
@@ -13,6 +12,8 @@
 			<li>
 	  			{% include "event/_event_list.html" %}
 	  		</li>
+	  	{% empty %}
+			<p>No events created yet.</p>
 		{% endfor %}
 	</ul>
 {% endblock %}

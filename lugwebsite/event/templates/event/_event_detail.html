@@ -1,0 +1,40 @@
+<h3><em>{{ event.title }}</em> by {{event.organization_name}} on {{event.start_date}} at {{event.start_time}}</h3>
+
+<img src="{{event.organization_logo.url}}">
+
+<p>Organized at {{event.venue}}</p>
+
+<p>{{event.description}}</p>
+
+{% if event.price > 0 %}
+	<p>Amount payable {{event.price}}</p>
+{% endif %}
+
+<img src="{{event.event_image_1.url}}">
+<br>
+
+{% if event.event_image_2 %}
+	<img src="{{event.event_image_2.url}}">
+{% endif %}
+<br>
+
+{% if event.event_image_3 %}
+	<img src="{{event.event_image_3.url}}">
+{% endif %}
+<br>
+
+{% if event.event_image_4  %}
+	<img src="{{event.event_image_4.url}}">
+{% endif %}
+<br>
+
+
+<p>For more information click on this link <a href="{{event.link}}">{{event.link}}</a></p>
+<p>For queries contact at {{event.contact_no}} or write an email at {{event.contact_email}} </p>
+
+<br>
+<br>
+{% if user.is_authenticated and post.user == user and not hide_delete %}
+	<a href="#" title="delete">Delete</a>
+{% endif %}
+

@@ -25,7 +25,7 @@ class Event(models.Model):
 	venue = models.TextField(blank=False)
 
 	link = models.URLField(blank=False)
-	price = models.PositiveIntegerField(blank=True)
+	price = models.PositiveIntegerField(blank=True, default=0)
 
 	event_image_1 = models.ImageField(upload_to='event_images',blank=False)
 	event_image_2 = models.ImageField(upload_to='event_images',blank=True)
