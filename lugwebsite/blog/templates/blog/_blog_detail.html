@@ -5,3 +5,15 @@
 {% if user.is_authenticated and post.user == user and not hide_delete %}
 	<a href="{% url 'blog:delete' pk=post.pk %}" title="delete">Delete</a>
 {% endif %}
+
+<h4>Comments</h4>
+{% for comment in post.comments.all %}
+	<ul>
+		<li>
+			<p>{{ comment.text|safe|linebreaks }}</p>
+    		<p>Posted by: <strong>{{ comment.author }}</strong></p>
+    	</li>
+	</ul>
+	{% empty %}
+	<p>No comments posted.</p>
+{% endfor %}
