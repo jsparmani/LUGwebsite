@@ -69,6 +69,19 @@ class EventDetail(LoginRequiredMixin,generic.DetailView):
         )
 
 
+class DeleteEvent(LoginRequiredMixin, generic.DeleteView):
+    model = models.Event
+    success_url = reverse_lazy("event:all")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user_id=self.request.user.id)
+
+    def delete(self, *args, **kwargs):
+        messages.success(self.request, "Event Deleted")
+        return super().delete(*args, **kwargs)
+
+
 class UserEvents(LoginRequiredMixin,generic.ListView):
     model = models.Event
     template_name = "event/user_event_list.html"

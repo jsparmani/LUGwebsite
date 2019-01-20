@@ -1,9 +1,10 @@
 <h3><em>{{ post.title }}</em> by {{post.user.username}} at {{post.created_at}}</h3>
 <p>{{post.message|truncatechars:10}}</p>
 <p>Comments: {{post.comments.all.count}}</p>
-{% if user.is_authenticated %}
+<!-- {% if user.is_authenticated %}
 	<a href="{% url 'blog:single' username=post.user.username pk=post.pk %}">Read more...</a>
 {% else %}
 	<p><a href="{% url  'accounts:login' %}">Log In</a> or <a href="{% url  'accounts:login' %}">Sign Up</a> to read more...</p>
-{% endif %}
+{% endif %} -->
+<a href="{% url 'blog:single' username=post.user.username pk=post.pk %}">Read more...</a>
 <br>

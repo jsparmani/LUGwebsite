@@ -6,5 +6,6 @@
 			{{ form.as_p }}
 			<input type="submit"  value="Log In" >
 		</form>
+		<p>Not a registered user? <a href="{% url 'accounts:signup' %}">SignUp</a> now</p>
 {% endblock %}
 
