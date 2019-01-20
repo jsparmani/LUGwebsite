@@ -9,8 +9,8 @@
 
 	<a href="{% url 'home' %}">Home</a>
 	<a href="{% url 'blog:all' %}">Blogs</a>
+	<a href="{% url 'event:all' %}">Events</a>
 	{% if user.is_authenticated %}
-		<a href="{% url 'event:create' %}">Create Event</a>
 		<a href="{% url 'accounts:logout' %}">Logout</a>
 		<h3>Hello {{user.first_name}}, welcome aboard!</h3>
 	{% else %}

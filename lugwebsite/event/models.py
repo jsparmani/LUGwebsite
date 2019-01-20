@@ -44,4 +44,4 @@ class Event(models.Model):
 		return reverse('home')
 
 	class Meta():
-		ordering = ['-created_at']
+		ordering = ['start_date']

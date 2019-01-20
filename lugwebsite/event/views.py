@@ -43,10 +43,16 @@ from . import forms
 class CreateEvent(LoginRequiredMixin, generic.FormView):
     template_name = 'event/event_form.html'
     form_class = forms.EventForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('event:all')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+
+
+class EventList(generic.ListView):
+    model = models.Event
+    ####
