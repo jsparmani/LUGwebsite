@@ -10,6 +10,7 @@ urlpatterns = [
 				re_path(r"by/(?P<username>[-\w]+)/(?P<pk>\d+)/$",views.EventDetail.as_view(),name="single"),
 				re_path(r"by/(?P<username>[-\w]+)/$",views.UserEvents.as_view(),name="for_user"),
 				re_path(r"delete/(?P<pk>\d+)/$",views.DeleteEvent.as_view(),name="delete"),
+				re_path(r'^event/(?P<pk>\d+)/update/$',views.UpdateEvent.as_view(),name='update'),
 
 
 ]

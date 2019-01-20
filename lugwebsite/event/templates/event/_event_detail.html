@@ -36,6 +36,7 @@
 <br>
 
 {% if user.is_authenticated and event.user == user and not hide_delete %}
+	<a href="{% url 'event:update' pk=event.pk %}" title="update">Update</a>
 	<a href="{% url 'event:delete' pk=event.pk %}" title="delete">Delete</a>
 {% endif %}
 

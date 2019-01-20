@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -67,7 +67,15 @@ class EventDetail(LoginRequiredMixin,generic.DetailView):
         return queryset.filter(
             user__username__iexact=self.kwargs.get("username")
         )
+#Experiment with update view
 
+class UpdateEvent(generic.UpdateView,LoginRequiredMixin):
+    template_name = 'event/event_form.html'
+    success_url = reverse_lazy("event:all")
+    form_class = forms.EventForm
+    model = models.Event
+
+#Experiment ended here
 
 class DeleteEvent(LoginRequiredMixin, generic.DeleteView):
     model = models.Event
