@@ -1,7 +1,6 @@
 {% extends "event/event_base.html" %}
 
 {% block pre_event %}
-	<a href="{% url 'event:create' %}">Create New Event</a>
 	<a href="{% url 'event:for_user' username=user.username %}">My Events</a>
 {% endblock %}
 

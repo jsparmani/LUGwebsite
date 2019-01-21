@@ -91,7 +91,8 @@ def add_comment_to_post(request,pk):
             comment.post = post
             comment.author = request.user.username
             comment.save()
-            return redirect ('post_detail',pk=post.pk)
+            # return redirect ('post_detail',pk=post.pk)
+            return redirect ('blog:single',pk=post.pk,username=post.user.username)
     else:
         form = forms.CommentForm()
     return render(request,'blog/comment_form.html',{'form':form})

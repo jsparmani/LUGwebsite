@@ -15,3 +15,5 @@ class UserCreateForm(UserCreationForm):
 			self.fields['first_name'].label='First Name'
 			self.fields['last_name'].label='Last Name'
 			self.fields['email'].label='Email Address'
+			
+
