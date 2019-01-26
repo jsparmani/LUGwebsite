@@ -20,6 +20,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+admin.site.site_header = 'LINUX USER GROUP'
+admin.site.site_title = 'Linux User Group Administration'
+admin.site.index_title = 'Linux User Group Administration'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.HomePage.as_view(),name='home'),

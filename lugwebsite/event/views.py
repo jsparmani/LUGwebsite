@@ -4,6 +4,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
+from datetime import datetime
 
 from . import models
 from . import forms
@@ -57,7 +58,10 @@ class CreateEvent(LoginRequiredMixin, generic.FormView):
 
 class EventList(generic.ListView):
     model = models.Event
-    ####
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(end_date__gte =datetime.now().date())
 
 class EventDetail(LoginRequiredMixin,generic.DetailView):
     model = models.Event
