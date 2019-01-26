@@ -13,35 +13,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your views here.
 
-# VIEWS RELATED TO POST CREATE, LIST, DELETE, DETAIL, USER LIST
-# class CreateEvent(LoginRequiredMixin, generic.CreateView):
-#     model = models.Event
-#     fields = [  'organization_name',
-#     			'organization_logo',
-#     			'title',
-#     			'description',
-# 				'start_date',
-# 				'end_date',
-# 				'start_time',
-# 				'end_time',
-# 				'venue',
-# 				'link',
-# 				'price',
-# 				'event_image_1',
-# 				'event_image_2',
-# 				'event_image_3',
-# 				'event_image_4',
-# 				'contact_no',
-# 				'contact_email',
-# 			]
-
-
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.user = self.request.user
-#         self.object.save()
-#         return super().form_valid(form)
-
 
 class CreateEvent(LoginRequiredMixin, generic.FormView):
     template_name = 'event/event_form.html'
@@ -61,7 +32,7 @@ class EventList(generic.ListView):
     
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(end_date__gte =datetime.now().date())
+        return queryset.filter(end_date__gte =datetime.now().date(), verified__iexact = 1)
 
 class EventDetail(LoginRequiredMixin,generic.DetailView):
     model = models.Event
