@@ -10,6 +10,9 @@
 		{% for event in event_list %}
 			<li>
 	  			{% include "event/_event_list.html" %}
+	  			{% if not event.verified == 1 %}
+	  				<p>Status: Not Verified</p>
+	  			{% endif %}
 	  		</li>
 	  	{% empty %}
 			<p>No events created yet.</p>

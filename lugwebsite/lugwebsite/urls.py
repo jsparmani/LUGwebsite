@@ -31,6 +31,7 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')),
     path('blog/',include('blog.urls',namespace = 'blog')),
     path('event/',include('event.urls',namespace = 'event')),
+    path('emails/',include('emails.urls',namespace = 'emails')),
     path('welcome/',views.WelcomePage.as_view(),name='welcome'),
     path('thanks/',views.ThanksPage.as_view(),name='thanks'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

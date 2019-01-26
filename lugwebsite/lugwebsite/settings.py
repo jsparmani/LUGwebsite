@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
     'event',
+    'emails',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,13 @@ LOGOUT_REDIRECT_URL = 'thanks'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+
+
+# E-MAIL SETTINGS
+
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'lug.tiet@yahoo.com'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_PASSWORD = 'password@LUG2019'

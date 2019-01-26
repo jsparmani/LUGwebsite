@@ -6,6 +6,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from datetime import datetime
 
+
 from . import models
 from . import forms
 
@@ -17,7 +18,8 @@ User = get_user_model()
 class CreateEvent(LoginRequiredMixin, generic.FormView):
     template_name = 'event/event_form.html'
     form_class = forms.EventForm
-    success_url = reverse_lazy('event:all')
+    # success_url = reverse_lazy('event:all')
+    success_url = reverse_lazy('emails:send')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -83,3 +85,4 @@ class UserEvents(LoginRequiredMixin,generic.ListView):
         context = super().get_context_data(**kwargs)
         context["event_user"] = self.event_user
         return context
+
