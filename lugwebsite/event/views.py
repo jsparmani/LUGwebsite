@@ -44,7 +44,7 @@ class EventDetail(LoginRequiredMixin,generic.DetailView):
         return queryset.filter(
             user__username__iexact=self.kwargs.get("username")
         )
-#Experiment with update view
+
 
 class UpdateEvent(generic.UpdateView,LoginRequiredMixin):
     template_name = 'event/event_form.html'
@@ -52,7 +52,6 @@ class UpdateEvent(generic.UpdateView,LoginRequiredMixin):
     form_class = forms.EventForm
     model = models.Event
 
-#Experiment ended here
 
 class DeleteEvent(LoginRequiredMixin, generic.DeleteView):
     model = models.Event
